@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -325,7 +324,7 @@
     </div>
 
     <script>
-        // DOM Elements
+       
         const cityInput = document.getElementById('city-input');
         const searchBtn = document.getElementById('search-btn');
         const cityName = document.querySelector('.city-name');
@@ -344,7 +343,7 @@
         const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
         dateElement.textContent = today.toLocaleDateString('en-US', options);
 
-        // Weather icons mapping
+        
         const weatherIcons = {
             'sunny': 'fas fa-sun',
             'cloudy': 'fas fa-cloud',
@@ -353,14 +352,14 @@
             'default': 'fas fa-cloud'
         };
 
-        // Temperature unit state
+       
         let isCelsius = true;
 
-        // Update weather function
+   
         function updateWeather(city, temp, condition, humidity, wind) {
             cityName.textContent = city;
             
-            // Convert temperature if needed
+            
             const displayTemp = isCelsius ? temp : Math.round((temp * 9/5) + 32);
             temperature.innerHTML = `${displayTemp}<span>°${isCelsius ? 'C' : 'F'}</span>`;
             
@@ -368,7 +367,7 @@
             humidityValue.textContent = `${humidity}%`;
             windValue.textContent = `${wind} km/h`;
             
-            // Change icon based on condition
+            
             const conditionLower = condition.toLowerCase();
             if (conditionLower.includes('sun')) {
                 weatherIcon.className = weatherIcons.sunny;
@@ -383,7 +382,7 @@
             }
         }
 
-        // Generate random weather data (for demo purposes)
+       
         function getRandomWeatherData(city) {
             const conditions = ['Sunny', 'Cloudy', 'Rainy', 'Snowy'];
             const randomCondition = conditions[Math.floor(Math.random() * conditions.length)];
@@ -397,7 +396,7 @@
             };
         }
 
-        // Update forecast temperatures
+      
         function updateForecastTemps() {
             forecastDays.forEach(day => {
                 const tempElement = day.querySelector('.forecast-temp');
@@ -407,7 +406,7 @@
             });
         }
 
-        // Search button event
+       
         searchBtn.addEventListener('click', () => {
             const city = cityInput.value || 'New York';
             const weatherData = getRandomWeatherData(city);
@@ -419,27 +418,27 @@
                 weatherData.wind
             );
             
-            // Update forecast with random data
+            
             forecastDays.forEach(day => {
                 const temp = Math.floor(Math.random() * 30) + 5;
                 const displayTemp = isCelsius ? temp : Math.round((temp * 9/5) + 32);
                 day.querySelector('.forecast-temp').textContent = `${displayTemp}°${isCelsius ? 'C' : 'F'}`;
                 
-                // Randomly update forecast icons
+                
                 const icons = ['fa-sun', 'fa-cloud-sun', 'fa-cloud', 'fa-cloud-rain'];
                 const randomIcon = icons[Math.floor(Math.random() * icons.length)];
                 day.querySelector('.forecast-icon i').className = `fas ${randomIcon}`;
             });
         });
 
-        // Temperature unit toggle
+        
         celsiusBtn.addEventListener('click', () => {
             if (!isCelsius) {
                 isCelsius = true;
                 celsiusBtn.classList.add('active');
                 fahrenheitBtn.classList.remove('active');
                 
-                // Update all temperatures
+               
                 const currentTemp = parseInt(temperature.textContent);
                 temperature.innerHTML = `${Math.round((currentTemp - 32) * 5/9)}<span>°C</span>`;
                 updateForecastTemps();
@@ -452,17 +451,17 @@
                 fahrenheitBtn.classList.add('active');
                 celsiusBtn.classList.remove('active');
                 
-                // Update all temperatures
+                
                 const currentTemp = parseInt(temperature.textContent);
                 temperature.innerHTML = `${Math.round((currentTemp * 9/5) + 32)}<span>°F</span>`;
                 updateForecastTemps();
             }
         });
 
-        // Initialize with default data
+       
         updateWeather('Delhi', 33, 'Sunny', 78, 12);
         
-        // Add Enter key functionality
+       
         cityInput.addEventListener('keyup', (event) => {
             if (event.key === 'Enter') {
                 searchBtn.click();
